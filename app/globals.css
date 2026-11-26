@@ -1,0 +1,375 @@
+:root {
+  --noite: #12141c;
+  --superficie: #1a1e29;
+  --linha: #2b3140;
+  --texto: #ebe6dc;
+  --apagado: #8f94a4;
+
+  --magreza: #7fabd8;
+  --normal: #8fcb9b;
+  --sobrepeso: #e4b965;
+  --obesidade: #e68b9b;
+  --erro: #f09a8a;
+
+  --acento: var(--texto);
+  --fonte: var(--font-bricolage), "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, #1d2233 0%, transparent 60%),
+    var(--noite);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--magreza);
+  outline-offset: 3px;
+}
+
+/* ---------- Página ---------- */
+
+.pagina {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 9vw, 7rem) 1.25rem 3rem;
+}
+
+.cabecalho h1 {
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 700;
+  font-variation-settings: "wdth" 80, "opsz" 96;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.lead {
+  max-width: 34em;
+  margin-top: 1.25rem;
+  color: var(--apagado);
+  font-size: 1.125rem;
+}
+
+.formula {
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+/* ---------- Formulário ---------- */
+
+.calculadora {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--apagado);
+  font-size: 0.9375rem;
+}
+
+.entrada {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  transition: border-color 150ms ease;
+}
+
+.entrada:focus-within {
+  border-color: var(--apagado);
+}
+
+.entrada.com-erro {
+  border-color: var(--erro);
+}
+
+.entrada input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 0;
+  background: none;
+  border: 0;
+  color: var(--texto);
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.entrada input:focus {
+  outline: none;
+}
+
+.entrada input::placeholder {
+  color: #4c5366;
+}
+
+.unidade {
+  color: var(--apagado);
+}
+
+.botao {
+  align-self: end;
+  height: calc(1.5rem * 1.55 + 1.7rem + 2px);
+  padding: 0 1.75rem;
+  background: var(--texto);
+  color: var(--noite);
+  border: 0;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 150ms ease;
+}
+
+.botao:hover {
+  transform: translateY(-1px);
+}
+
+.botao:active {
+  transform: translateY(0);
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.erro {
+  margin-top: 0.4rem;
+  color: var(--erro);
+  font-size: 0.9375rem;
+}
+
+.erro-geral {
+  margin-top: 1rem;
+}
+
+/* ---------- Resultado ---------- */
+
+.resultado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem 2.5rem;
+  min-height: 9rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.resultado[data-faixa="Magreza"] { --acento: var(--magreza); }
+.resultado[data-faixa="Normal"] { --acento: var(--normal); }
+.resultado[data-faixa="Sobrepeso"] { --acento: var(--sobrepeso); }
+.resultado[data-faixa="Obesidade"] { --acento: var(--obesidade); }
+
+.valor {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  line-height: 0.85;
+}
+
+.numero {
+  color: var(--acento);
+  font-size: clamp(5rem, 16vw, 9.5rem);
+  font-weight: 700;
+  font-variation-settings: "wdth" 75, "opsz" 96;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  transition: color 400ms ease;
+}
+
+.kgm2 {
+  color: var(--apagado);
+  font-size: 1.125rem;
+}
+
+.veredito {
+  padding-bottom: 0.6rem;
+}
+
+.classe {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.descricao {
+  margin-top: 0.25rem;
+  color: var(--apagado);
+}
+
+.vazio {
+  max-width: 28em;
+  color: var(--apagado);
+}
+
+/* ---------- Escala ---------- */
+
+.escala {
+  margin-top: 2rem;
+}
+
+.trilho {
+  position: relative;
+  display: flex;
+  gap: 3px;
+}
+
+.faixa {
+  flex-basis: 0;
+  min-width: 0;
+  padding-top: 0.9rem;
+  border-top: 6px solid var(--cor);
+  opacity: 0.45;
+  transition: opacity 400ms ease;
+}
+
+.escala[aria-hidden="true"] .faixa,
+.faixa.ativa {
+  opacity: 1;
+}
+
+.escala:has(.ativa) .faixa:not(.ativa) {
+  opacity: 0.55;
+}
+
+.faixa-magreza { --cor: var(--magreza); }
+.faixa-normal { --cor: var(--normal); }
+.faixa-sobrepeso { --cor: var(--sobrepeso); }
+.faixa-obesidade { --cor: var(--obesidade); }
+
+.faixa-nome {
+  display: block;
+  color: var(--cor);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.faixa-rotulo {
+  display: block;
+  color: var(--apagado);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agulha {
+  position: absolute;
+  top: -14px;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  border-radius: 50%;
+  background: var(--texto);
+  box-shadow: 0 0 0 5px var(--noite);
+  opacity: 0;
+  transition:
+    left 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+}
+
+.agulha.visivel {
+  opacity: 1;
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: clamp(4rem, 10vw, 7rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--linha);
+  color: var(--apagado);
+  font-size: 0.875rem;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 720px) {
+  .formulario {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .botao {
+    grid-column: 1 / -1;
+    height: 3.5rem;
+  }
+
+  .trilho {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faixa {
+    flex-grow: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0 0.7rem 1rem;
+    border-top: 0;
+    border-left: 4px solid var(--cor);
+  }
+
+  .faixa-rotulo {
+    font-size: 0.9375rem;
+  }
+
+  .agulha {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+  }
+}
