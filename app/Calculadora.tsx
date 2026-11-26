@@ -81,7 +81,10 @@ export default function Calculadora() {
               autoComplete="off"
               placeholder="72,5"
               value={peso}
-              onChange={(e) => setPeso(e.target.value)}
+              onChange={(e) => {
+                setPeso(e.target.value);
+                setResultado(null);
+              }}
               aria-invalid={Boolean(erros.peso)}
               aria-describedby={erros.peso ? `${id}-peso-erro` : undefined}
             />
@@ -104,7 +107,10 @@ export default function Calculadora() {
               autoComplete="off"
               placeholder="1,75"
               value={altura}
-              onChange={(e) => setAltura(e.target.value)}
+              onChange={(e) => {
+                setAltura(e.target.value);
+                setResultado(null);
+              }}
               aria-invalid={Boolean(erros.altura)}
               aria-describedby={erros.altura ? `${id}-altura-erro` : undefined}
             />
